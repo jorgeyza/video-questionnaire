@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:react/recommended", "plugin:react/jsx-runtime", "plugin:typescript-sort-keys/recommended"],
+  "plugins": ["sort-keys-fix", "typescript-sort-keys"],
+  "rules": {
+    "sort-keys-fix/sort-keys-fix": "error",
+    "no-unused-vars": "warn",
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "ignoreCase": true
+      }
+    ]
+  },
+  "parser": "@typescript-eslint/parser"
 }

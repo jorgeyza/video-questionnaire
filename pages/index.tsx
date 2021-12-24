@@ -1,21 +1,28 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
+import { Flex, Heading } from '@chakra-ui/react'
 
+import VideoQuestion from 'components/VideoQuestion'
 
-// import Header from 'components/header.js'
-import VideoQuestion from 'components/videoQuestion'
+const VIDEO_QUESTIONS = [
+  { id: 1, text: 'If you were offered the position of mayor of your city, would you take it?' },
+  { id: 2, text: 'If you were offered the position of mayor of your city, would you take it?' },
+  { id: 3, text: 'If you were offered the position of mayor of your city, would you take it?' },
+  { id: 4, text: 'If you were offered the position of mayor of your city, would you take it?' }
+]
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Video Questionnaire</title>
-        <meta name='description' content='Create your own video questionnaire' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <VideoQuestion />
+      <Heading as='h1' color='neutral' paddingBottom={10} size='2xl' textAlign='center'>
+        Video Questionnaire
+      </Heading>
+      <Flex columnGap={2}>
+        {VIDEO_QUESTIONS.map((question) => (
+          <VideoQuestion key={question.id} text={question.text} />
+        ))}
+      </Flex>
     </>
   )
 }
 
-export default Home
+export default HomePage

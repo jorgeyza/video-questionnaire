@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Flex } from '@chakra-ui/react'
 
 import { theme } from '../theme'
 
@@ -10,7 +10,15 @@ import '@fontsource/open-sans/700.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Flex
+        alignItems='center'
+        as='section'
+        bgGradient='linear(116.82deg, #2F2C67 0%, #7D73C0 31.25%, #41329A 60.42%, #795CEE 100%)'
+        flexDirection='column'
+        justifyContent='center'
+        minH='100vh'>
+        <Component {...pageProps} />
+      </Flex>
     </ChakraProvider>
   )
 }
