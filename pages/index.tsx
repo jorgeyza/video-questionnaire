@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { Flex, Heading } from '@chakra-ui/react'
 
-import VideoQuestion from 'components/VideoQuestion'
+import VideoQuestion from 'src/components/VideoQuestion'
 
 const VIDEO_QUESTIONS = [
   { id: 1, text: 'If you were offered the position of mayor of your city, would you take it?' },

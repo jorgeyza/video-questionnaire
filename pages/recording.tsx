@@ -1,4 +1,4 @@
-import Recording from 'components/Recording';
+import Recording from 'src/components/Recording';
 
 interface Props {
   text: string;
