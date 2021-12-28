@@ -1,28 +1,35 @@
-import type { NextPage } from 'next'
-import { Flex, Heading } from '@chakra-ui/react'
+import type { NextPage } from 'next';
+import { Flex, Heading, Skeleton } from '@chakra-ui/react';
+import { useQuery } from '@apollo/client';
 
-import VideoQuestion from 'src/components/VideoQuestion'
+import VideoQuestion from 'src/components/VideoQuestion';
 
-const VIDEO_QUESTIONS = [
-  { id: 1, text: 'If you were offered the position of mayor of your city, would you take it?' },
-  { id: 2, text: 'If you were offered the position of mayor of your city, would you take it?' },
-  { id: 3, text: 'If you were offered the position of mayor of your city, would you take it?' },
-  { id: 4, text: 'If you were offered the position of mayor of your city, would you take it?' }
-]
+import { GET_VIDEO_QUESTIONS } from 'src/graphql';
+
+interface videoQuestions {
+  id: string;
+  question: string;
+}
 
 const HomePage: NextPage = () => {
+  const { loading, error, data } = useQuery(GET_VIDEO_QUESTIONS);
+
+  if (error) return <p>Error :(</p>;
+
   return (
     <>
       <Heading as='h1' color='neutral' paddingBottom={10} size='2xl' textAlign='center'>
         Video Questionnaire
       </Heading>
-      <Flex columnGap={2}>
-        {VIDEO_QUESTIONS.map((question) => (
-          <VideoQuestion key={question.id} text={question.text} />
+      <Flex columnGap={2} overflowX='auto' w='80vw'>
+        {data?.videoQuestions.map((question: videoQuestions) => (
+          <Skeleton flex='0 0 245px' isLoaded={!loading} key={question.id}>
+            <VideoQuestion  id={question.id} text={question.question} />
+          </Skeleton>
         ))}
       </Flex>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

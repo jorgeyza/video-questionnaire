@@ -11,7 +11,7 @@ export const VideoQuestion = objectType({
 export const VideoQuestionQuery = extendType({
   definition(t) {
     t.nonNull.list.field('videoQuestions', {
-      resolve(_root, args, ctx) {
+      resolve(_root, _args, ctx) {
         return ctx.prisma.videoQuestion.findMany();
       },
       type: 'VideoQuestion'
@@ -30,6 +30,25 @@ export const PostVideoQuestion = extendType({
         return ctx.prisma.videoQuestion.create({
           data: {
             question: args.question
+          }
+        });
+      },
+      type: 'VideoQuestion'
+    });
+  },
+  type: 'Mutation'
+});
+
+export const DeleteVideoQuestion = extendType({
+  definition(t) {
+    t.field('deleteVideoQuestion', {
+      args: {
+        id: nonNull(stringArg())
+      },
+      resolve(_root, args, ctx) {
+        return ctx.prisma.videoQuestion.delete({
+          where: {
+            id: args.id
           }
         });
       },
